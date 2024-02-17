@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { adminSignIn } from "../../../redux/actions/adminActions";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router";
+import {useDispatch} from "react-redux";
+import {adminSignIn} from "../../../redux/actions/adminActions";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Spinner from "../../../utils/Spinner";
 
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, Controller } from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm, Controller} from "react-hook-form";
 
 const schema = yup
   .object({
@@ -33,7 +33,7 @@ const AdminLogin = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: {errors},
   } = useForm({
     defaultValues,
     resolver: yupResolver(schema),
@@ -45,10 +45,10 @@ const AdminLogin = () => {
     }, 1000);
   }, []);
 
-  const onSubmit = ({ username, password }) => {
+  const onSubmit = ({username, password}) => {
     setLoading(true);
 
-    dispatch(adminSignIn({ username, password }, navigate));
+    dispatch(adminSignIn({username, password}, navigate));
   };
 
   return (
@@ -89,8 +89,8 @@ const AdminLogin = () => {
               <Controller
                 name="username"
                 control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
+                rules={{required: true}}
+                render={({field}) => (
                   <input
                     type="text"
                     placeholder="Username"
@@ -111,13 +111,13 @@ const AdminLogin = () => {
               <Controller
                 name="password"
                 control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
+                rules={{required: true}}
+                render={({field}) => (
                   <>
                     <input
                       placeholder="Password"
                       type={showPassword ? "text" : "password"}
-                      pattern="^(?=.*[A-Z])(?=.*[@])(?=.*\d).{6,}$"
+                      // pattern="^(?=.*[A-Z])(?=.*[@])(?=.*\d).{6,}$"
                       title="USE ONE : @-Number-UpperCase (at least 6 character)"
                       className="bg-[#515966] text-white rounded-lg outline-none py-2  placeholder:text-sm"
                       {...field}

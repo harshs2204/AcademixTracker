@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const API = axios.create({ baseURL: process.env.REACT_APP_SERVER_URL });
-const API = axios.create({ baseURL: "http://localhost:9000/" });
+const API = axios.create({baseURL: `http://localhost:3001/`});
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("user")) {
@@ -14,11 +14,10 @@ API.interceptors.request.use((req) => {
 
 // Admin
 
-export const adminSignIn = async(formData) =>{
-  
+export const adminSignIn = async (formData) => {
   return await API.post("/api/admin/login", formData);
   // console.log("formData");
-} 
+};
 
 export const adminUpdatePassword = (updatedPassword) =>
   API.post("/api/admin/updatepassword", updatedPassword);
