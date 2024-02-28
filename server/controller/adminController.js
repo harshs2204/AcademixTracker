@@ -106,14 +106,24 @@ export const updateAdmin = async (req, res) => {
 
 export const addAdmin = async (req, res) => {
   try {
-    const {name, dob, department, contactNumber, avatar, email, joiningYear} =
-      req.body;
+    const {
+      name,
+      dob,
+      username,
+      department,
+      password,
+      contactNumber,
+      avatar,
+      email,
+      joiningYear,
+    } = req.body;
     const errors = {emailError: String};
     const existingAdmin = await Admin.findOne({email});
     if (existingAdmin) {
       errors.emailError = "Email already exists";
       return res.status(400).json(errors);
     }
+    console.log(password);
     const existingDepartment = await Department.findOne({department});
     let departmentHelper = existingDepartment.departmentCode;
     const admins = await Admin.find({department});
@@ -129,16 +139,16 @@ export const addAdmin = async (req, res) => {
     var date = new Date();
     var components = ["ADM", date.getFullYear(), departmentHelper, helper];
 
-    var username = components.join("");
-    let hashedPassword;
-    const newDob = dob.split("-").reverse().join("-");
+    // var username = components.join("");
+    // let hashedPassword;
+    // const newDob = dob.split("-").reverse().join("-");
 
-    hashedPassword = await bcrypt.hash(newDob, 10);
+    // hashedPassword = await bcrypt.hash(newDob, 10);
     var passwordUpdated = false;
     const newAdmin = await new Admin({
       name,
       email,
-      password: hashedPassword,
+      password,
       joiningYear,
       username,
       department,
@@ -156,6 +166,7 @@ export const addAdmin = async (req, res) => {
   } catch (error) {
     const errors = {backendError: String};
     errors.backendError = error;
+    console.log(error);
     res.status(500).json(errors);
   }
 };

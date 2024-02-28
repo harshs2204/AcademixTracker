@@ -52,9 +52,9 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="bg-[#04bd7d] h-screen w-screen flex items-center justify-center">
+    <div className="bg-[#04bd7d] h-screen w-screen flex flex-col items-center justify-center">
       <a href="/">
-        <button className="w-32 hover:scale-105 transition-all duration-150 rounded-lg flex items-right justify-center text-white text-base py-1 bg-[#FF2400]">
+        <button className="w-32 hover:scale-105 mb-4 transition-all duration-150 rounded-lg flex items-right justify-center text-white text-base py-1 bg-[#FF2400]">
           Home
         </button>
       </a>
